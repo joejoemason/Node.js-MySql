@@ -1,15 +1,19 @@
 var mysql = require("mysql");
 var prompt = require("prompt");
+var inquirer = require("inquirer");
 
-//  mysql connection
+
+
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "Newph0ne0112",
-    database: "bamazon"
+    database: "bamazon",
+    port: 3306
+
 });
 
-// Connecting to the Bamazon Database
+
 connection.connect(function (err) {
     if (err) {
         console.log('Error connecting to Db');
@@ -25,7 +29,7 @@ connection.connect(function (err) {
                 required: true
             },
             howMany: {
-                message: "Please enter how many you would like to buy.",
+                message: "How many would youlike to buy.",
                 pattern: /^[0-9][0-9]$|^[0-9][0-9][0-9]$/,
                 required: true
             }
@@ -42,11 +46,9 @@ connection.connect(function (err) {
         }
     };
 
-    // Function stop to the app
     var stopApp = function () {
         return next(err);
     }
-    // Function to start the app
     var beginApp = function () {
         connection.query("SELECT * FROM Products", function (err, result) {
             if (err) throw err;
@@ -55,7 +57,6 @@ connection.connect(function (err) {
         });
     }
 
-    // Function to display all of the products available for sale in a table
     var getBamazonProducts = function (products) {
         console.log("Hello, Welcome to Bamazon! Here are all of the products, their costs, and current stock.");
         for (var i = 0; i < products.length; i++) {
@@ -70,7 +71,6 @@ connection.connect(function (err) {
         userSelectID();
     }
 
-    // Function to get the user selection
     var userSelectID = function () {
         prompt.start();
         console.log("Please enter the ID of the product you would like to buy.");
@@ -79,16 +79,12 @@ connection.connect(function (err) {
             if (err) {
                 console.log(err)
             }
-            //console.log(result);
             var userChoiceID = parseInt(result.ID);
             var userChoiceHowMany = parseInt(result.howMany);
-            // console.log("id=" + userChoiceID + " how many=" + userChoiceHowMany);
 
-            // Function to check the inventory of an item
             var checkInventory = function () {
                 connection.query('SELECT * FROM Products WHERE ItemID =' + userChoiceID, function (err, result) {
                     if (err) throw err;
-                    //console.log(result);
 
                     var userWantsToBuy = userChoiceHowMany;
                     var productInventory = result[0].StockQuantity;
@@ -105,9 +101,7 @@ connection.connect(function (err) {
                         console.log("Your total is $" + totalCost);
                         connection.query('UPDATE Products SET StockQuantity = ' + isInStock + ' WHERE ItemID =' + userChoiceID, function (err, result) {
                             if (err) throw err;
-                            connection.query('SELECT ItemID, ProductName, DepartmentName, Price, StockQuantity FROM products WHERE ItemID =' + userChoiceID, function (err, result) {
-                                //console.log(result);
-                            });
+                            connection.query('SELECT ItemID, ProductName, DepartmentName, Price, StockQuantity FROM products WHERE ItemID =' + userChoiceID, function (err, result) {});
                         });
                         prompt.get(schema2, function (err, result) {
                             if (err) {
