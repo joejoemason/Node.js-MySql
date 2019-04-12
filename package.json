@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node bamazonCustomer.js"
-
   },
   "repository": {
     "type": "git",
@@ -20,9 +19,15 @@
   },
   "homepage": "https://github.com/joejoemason/Node.js-MySql#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "cli-table": "^0.3.1",
     "colors": "^1.3.3",
+    "devtool": "^2.3.1",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
     "inquirer": "^6.2.2",
     "mysql": "^2.16.0",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "sql": "^0.78.0"
   }
 }
