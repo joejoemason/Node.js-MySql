@@ -2,8 +2,9 @@
 
 
 ![Screenshots of working app]
-(Images/Screenshot 2019-04-12 02.09.10.png)
-(Images/Screenshot 2019-04-12 02.10.01.png)
+(https://github.com/joejoemason/Node.js-MySql/blob/936b8fc376577d9b5c609c10e87d4feb59dc672c/Images/Screenshot 2019-04-12 02.09.10.png)
+(https://github.com/joejoemason/Node.js-MySql/blob/936b8fc376577d9b5c609c10e87d4feb59dc672c/Images/Screenshot 2019-04-12 02.10.01.png)
+
 
 
 
